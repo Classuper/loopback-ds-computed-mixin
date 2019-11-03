@@ -106,4 +106,12 @@ describe('loopback computed property', function() {
         expect(itemFromDb).to.not.have.property('promised')
       })
   })
+
+  it('should recompute the model property after update', function() {
+    return this.itemOne.updateAttributes({ status: 'new' })
+      .then(item => {
+        expect(this.itemOne.readonly).to.equal(false)
+        expect(item.readonly).to.equal(false)
+      })
+  })
 })
